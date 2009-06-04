@@ -4,9 +4,11 @@ gem "bcrypt-ruby", :lib => "bcrypt"
 rake "gems:install", :sudo => true
 
 generate :session, "user_session"
-generate :rspec_model, "user"
 generate :rspec_controller, "user_sessions"
 generate :rspec_controller, "users"
+
+# Done manually t onot have duplicate migrations
+# generate :rspec_model, "user"
 
 # Routes
 route "map.resource :user_session"
@@ -272,10 +274,17 @@ file "app/views/user_sessions/new.html.haml", <<-END
   = f.submit "Login" 
 END
 
-
+# Factory
+file "spec/factories/user.rb", <<-END
+Factory.define :user do |u|
+  u.login 'johndoe'
+  u.email 'john@doe.com'
+end
+END
 
 # Specs
-
+file "spec/models/user_spec.rb", <<-END
+END
 
 
 # Admin pages
