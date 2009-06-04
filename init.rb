@@ -17,6 +17,7 @@ load "gems.rb"
 
 # Install authlogic a
 load "authlogic.rb"
+
 # Finalize setup
 rake "db:create"
 rake "db:create", :env => "test"
@@ -24,3 +25,5 @@ rake "db:migrate"
 
 git :add => "."
 git :commit => "-a -m 'Finishing application setup'"
+
+rake "spec"
