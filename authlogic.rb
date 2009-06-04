@@ -1,4 +1,7 @@
 gem "authlogic"
+gem "bcrypt-ruby", :lib => "bcrypt"
+
+rake "gems:install", :sudo => true
 
 generate :session, "user_session"
 generate :rspec_model, "user"
@@ -12,7 +15,7 @@ route "map.resources :users"
 route "map.root :controller => 'user_session', :action => 'new' # optional, this just sets the root route"
 
 # User model migration
-file "db/migrate/20090531221621_create_users.rb"  , <<-END 
+file "db/migrate/#{Time.now.utc.strftime("%Y%m%d%H%M%S")}_create_users.rb"  , <<-END 
 class CreateUsers < ActiveRecord::Migration
   def self.up
     create_table :users do |t|
@@ -35,6 +38,13 @@ class CreateUsers < ActiveRecord::Migration
      
       t.timestamps
     end
+    
+    add_index :users, :email
+    add_index :users, :login
+    add_index :users, :persistence_token
+    add_index :users, :perishable_token    
+    add_index :users, :last_request_at
+
   end
 
   def self.down
@@ -49,6 +59,7 @@ file "app/models/user.rb", <<-END
 class User < ActiveRecord::Base
   acts_as_authentic do |c|
     # c.my_config_option = my_value # for available options see documentation in: Authlogic::ActsAsAuthentic
+    c.crypto_provider = Authlogic::CryptoProviders::BCrypt
   end # block optional
 end
 END
@@ -176,36 +187,91 @@ END
 
 # User views
 file "app/views/users/new.html.haml", <<-END
+%h1 Register Account
+
+- form_for :user, :url => account_path do |f|
+  = f.error_messages
+  = f.render :partial => "form", :object => f
+  = f.submit "Register" 
 END
 
 
 file "app/views/users/edit.html.haml", <<-END
+%h1 Edit My Account
+
+- form_for @user, :url => account_path do |f|
+  = f.error_messages
+  = render :partial => "form", :object => f
+  = f.submit "Update"
+
+%br
+= link_to "My Profile", account_path
 END
 
 file "app/views/users/show.html.haml", <<-END
+%p
+  %b Login:
+  %=h @user.login
+%p
+  %b Login count:
+  %=h @user.login_count
+%p
+  %b Last Request at:
+  %=h @user.last_request_at
+%p
+  %b Last login at:
+  %=h @user.last_login_at
+%p
+  %b Current login at:
+  %=h @user.current_login_at
+%p
+  %b Last login IP
+  %=h @user.last_login_ip
+
+%= link_to 'Edit', edit_account_path
 END
 
 file "app/views/users/_form.html.haml", <<-END
+= form.label :login
+%br
+= form.text_field :login
+%br
+%br
+=form.label :password, form.object.new_record? ? nil : "Change password"
+%br
+= form.password_field :password
+%br
+%br
+=form.label: password_confirmation
+%br
+form.password_field :password_confirmation
+%br
 END
 
 # User Session Views
 #login
 file "app/views/user_sessions/new.html.haml", <<-END
-*
-<h1>Login</h1>
+%h1 Login
  
-<% form_for @user_session, :url => user_session_path do |f| %>
-  <%= f.error_messages %>
-  <%= f.label :login %><br />
-  <%= f.text_field :login %><br />
-  <br />
-  <%= f.label :password %><br />
-  <%= f.password_field :password %><br />
-  <br />
-  <%= f.check_box :remember_me %><%= f.label :remember_me %><br />
-  <br />
-  <%= f.submit "Login" %>
+- form_for @user_session, :url => user_session_path do |f| 
+  = f.error_messages 
+  = f.label :login 
+  %br 
+  = f.text_field :login 
+  %br
+  %br 
+  = f.label :password 
+  %br
+  = f.password_field :password 
+  %br
+  %br
+  = f.check_box :remember_me 
+  = f.label :remember_me 
+  %br
+  %br 
+  = f.submit "Login" 
 END
+
 
 
 # Specs
