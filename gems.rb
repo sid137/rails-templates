@@ -6,8 +6,8 @@
 # factory_girl
 
 
-gem "rspec", :init => false
-gem "rspec-rails", :init => false
+gem "rspec", :lib => false
+gem "rspec-rails", :lib => false
 
 gem "thoughtbot-factory_girl", :lib => "factory_girl", :source => "http://gems.github.com"
 run "mkdir -p spec/factories/"
