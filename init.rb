@@ -19,6 +19,11 @@ load "gems.rb"
 # Install authlogic a
 load "authlogic.rb"
 
+
+# Set up deployment scripts
+load "deploy.rb"
+
+
 # Finalize setup
 rake "db:create"
 rake "db:create", :env => "test"
