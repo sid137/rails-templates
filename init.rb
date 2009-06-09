@@ -1,4 +1,4 @@
-REPO = ENV[LREPO] || "http://github.com/sid137/rails-templates/raw/master/"
+REPO = "http://github.com/sid137/rails-templates/raw/master/"
 
 def load(template)
   load_template REPO + template 
