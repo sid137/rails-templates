@@ -1,7 +1,6 @@
 git :init
 
 file '.gitignore', <<-END
-log/*
 doc/*
 tmp/**/*
 config/database.yml
