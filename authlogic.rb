@@ -16,10 +16,12 @@ route "map.resource :account, :controller => 'users'"
 route "map.resources :users"
 route "map.root :controller => 'user_sessions', :action => 'new' # optional, this just sets the root route"
 
-file "features/user_management.feature", <<-END
+run "mkdir -p features/user_management/"
+
+file "features/user_management/user_management.feature", <<-END
 END
 
-file "features/step_definitions/user_management_steps.rb", <<-END
+file "features/user_management/user_management_steps.rb", <<-END
 END
 
 # User model migration
