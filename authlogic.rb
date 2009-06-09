@@ -11,10 +11,16 @@ generate :rspec_controller, "users"
 # generate :rspec_model, "user"
 
 # Routes
-route "map.resource :user_session"
+route "map.resource :user_sessions" 
 route "map.resource :account, :controller => 'users'"
 route "map.resources :users"
-route "map.root :controller => 'user_session', :action => 'new' # optional, this just sets the root route"
+route "map.root :controller => 'user_sessions', :action => 'new' # optional, this just sets the root route"
+
+file "features/user_management.feature", <<-END
+END
+
+file "features/step_definitions/user_management_steps.rb", <<-END
+END
 
 # User model migration
 file "db/migrate/#{Time.now.utc.strftime("%Y%m%d%H%M%S")}_create_users.rb"  , <<-END 
@@ -108,7 +114,7 @@ END
 
 
 # User Sessions Controller
-file "app/controllers/user_sessions_controller", <<-END
+file "app/controllers/user_sessions_controller.rb", <<-END
 class UserSessionsController < ApplicationController
   before_filter :require_no_user, :only => [:new, :create]
   before_filter :require_user, :only => :destroy
