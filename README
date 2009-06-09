@@ -1,1 +1,3 @@
 Rails templates for quickly setting up projects
+
+Run the init.rb template to begin setup.  It loads in all of the other templates afterwards
