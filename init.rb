@@ -1,7 +1,6 @@
 REPO = ENV[LREPO] || "http://github.com/sid137/rails-templates/raw/master/"
 
 def load(template)
-  puts REPO
   load_template REPO + template 
 end
 
