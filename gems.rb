@@ -55,12 +55,12 @@ file "features/support/local_path.rb", <<-END
 END
 
 
-file "app/views/layouts/application.html.haml", <<-END
-!!!
-%html
-  %head
-    %title Website
-  %body
-    = render :partial => "layouts/user"
-    = yield
-END
+#file "app/views/layouts/application.html.haml", <<-END
+#!!!
+#%html
+#  %head
+#    %title Website
+#  %body
+#    = render :partial => "layouts/user"
+#    = yield
+#END
