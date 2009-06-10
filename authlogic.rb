@@ -199,9 +199,9 @@ END
 file "app/views/users/new.html.haml", <<-END
 %h1 Register Account
 
-- form_for :user, :url => account_path do |f|
+- form_for @user, :url => account_path do |f|
   = f.error_messages
-  = render :partial => "form", :object => f
+  = render "form", :object => f
   = f.submit "Register" 
 END
 
@@ -211,7 +211,7 @@ file "app/views/users/edit.html.haml", <<-END
 
 - form_for @user, :url => account_path do |f|
   = f.error_messages
-  = render :partial => "form", :object => f
+  = render "form", :object => f
   = f.submit "Update"
 
 %br
