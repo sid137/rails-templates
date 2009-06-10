@@ -61,6 +61,5 @@ file "app/views/layouts/application.html.haml", <<-END
   %head
     %title Website
   %body
-    = render :partial => "layouts/user"
     = yield
 END

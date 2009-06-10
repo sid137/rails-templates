@@ -168,7 +168,7 @@ class ApplicationController < ActionController::Base
       unless current_user
         store_location
         flash[:notice] = "You must be logged in to access this page"
-        redirect_to new_user_session_url
+        redirect_to new_user_sessions_url
         return false
       end
     end
@@ -201,7 +201,7 @@ file "app/views/users/new.html.haml", <<-END
 
 - form_for :user, :url => account_path do |f|
   = f.error_messages
-  = f.render :partial => "form", :object => f
+  = render :partial => "form", :object => f
   = f.submit "Register" 
 END
 
@@ -247,14 +247,14 @@ file "app/views/users/_form.html.haml", <<-END
 = form.text_field :login
 %br
 %br
-=form.label :password, form.object.new_record? ? nil : "Change password"
+= form.label :password, form.object.new_record? ? nil : "Change password"
 %br
 = form.password_field :password
 %br
 %br
-=form.label: password_confirmation
+= form.label :password_confirmation
 %br
-form.password_field :password_confirmation
+= form.password_field :password_confirmation
 %br
 END
 
@@ -263,7 +263,7 @@ END
 file "app/views/user_sessions/new.html.haml", <<-END
 %h1 Login
  
-- form_for @user_session, :url => user_session_path do |f| 
+- form_for @user_session, :url => user_sessions_path do |f| 
   = f.error_messages 
   = f.label :login 
   %br 
