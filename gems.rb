@@ -42,7 +42,7 @@ class Webrat::Session
     content = []
     doc.xpath('//body/p|//body/pre').each do |para|
       value = unescape( para.inner_html.gsub( /<\\/?[^>]+>/, '') )
-      content << value unless value =~ /^\\s*(?:\{|RAILS_ROOT:|Parameters:|Show session dump|Headers:)/
+      content << value unless value =~ /^\\s*(?:\\{|RAILS_ROOT:|Parameters:|Show session dump|Headers:)/
     end
 
     content.join("\\n");
