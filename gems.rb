@@ -28,8 +28,7 @@ generate "cucumber"
 
 
 # Webrat fix to print full stack trace
-file "features/support/local_env.rb", 
-%q{
+file "features/support/local_env.rb",<<-END
 class Webrat::Session
   alias_method :old_formatted_error, :formatted_error
   def formatted_error
@@ -49,7 +48,7 @@ class Webrat::Session
     content.join("\n");
   end
 end
-}
+END
 
 
 file "features/support/local_paths.rb", <<-END
