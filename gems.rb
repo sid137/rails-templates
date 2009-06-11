@@ -62,9 +62,8 @@ module NavigationHelpers
   def path_to(page_name)
     case page_name
 
-    when /the home\*page/
+    when /the home\s*page/
       '/'
-
     # Add more mappings here.
     # Here is a more fancy example:
     #
@@ -79,6 +78,7 @@ module NavigationHelpers
 end
 
 World(NavigationHelpers)
+
 END
 
 file "app/views/layouts/application.html.haml", <<-END
