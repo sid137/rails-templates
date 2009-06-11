@@ -78,7 +78,12 @@ module NavigationHelpers
 end
 
 World(NavigationHelpers)
+END
 
+file "features/step_definitions/common_steps.rb", <<-END
+When /^I click(?: on)? "([^\\"]*)"$/ do |link|
+  click_link(link)
+end
 END
 
 file "app/views/layouts/application.html.haml", <<-END

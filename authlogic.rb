@@ -26,7 +26,7 @@ Feature: User Registration
     Scenario: Creating a new account
        Given I am on the home page
        And I am not logged in
-       When I follow "Register"
+       When I click on "Register"
        Then I should see thank you for registering
 END
 
