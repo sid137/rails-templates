@@ -19,9 +19,27 @@ route "map.root :controller => 'user_sessions', :action => 'new' # optional, thi
 run "mkdir -p features/user_management/"
 
 file "features/user_management/user_management.feature", <<-END
+Feature: User Registration
+    In order to create a personalized user space
+    As a guest to the site
+    I want to be able to register an account
+
+    Scenario: Creating a new account
+       Given I am on the home page
+       And I am not logged in
+       When I follow "Register"
+       Then I should see thank you for registering
+
 END
 
 file "features/user_management/user_management_steps.rb", <<-END
+
+Given /^I am not logged in$/ do
+end
+
+Then /^I should see thank you for registering$/ do
+  pending
+end
 END
 
 # User model migration
