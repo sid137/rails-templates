@@ -16,9 +16,9 @@ route "map.resource :account, :controller => 'users'"
 route "map.resources :users"
 route "map.root :controller => 'user_sessions', :action => 'new' # optional, this just sets the root route"
 
-run "mkdir -p features/user_management/"
+run "mkdir -p features/user_registration/"
 
-file "features/user_registration.feature", <<-END
+file "features/user_registration/user_registration.feature", <<-END
 Feature: User Registration
     In order to create a personalized user space
     As a guest to the site
@@ -31,7 +31,7 @@ Feature: User Registration
        Then I should see thank you for registering
 END
 
-file "features/step_definitions/user_registration_steps.rb", <<-END
+file "features/user_registration/user_registration_steps.rb", <<-END
 Given /^I am not logged in$/ do
 end
 

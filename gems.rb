@@ -51,7 +51,7 @@ end
 END
 
 
-file "features/support/local_paths.rb", <<-END
+file "features/support/paths.rb", <<-END
 module NavigationHelpers
   # Maps a name to a path. Used by the
   #
