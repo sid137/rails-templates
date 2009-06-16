@@ -17,8 +17,9 @@ run "rm public/index.html"
 load "gems.rb"
 
 # Install authlogic a
-load "authlogic.rb"
-
+if yes?("Install Authlogic?")
+  load "authlogic.rb"
+end
 
 # Set up deployment scripts
 load "deploy.rb"

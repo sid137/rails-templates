@@ -19,15 +19,38 @@ route "map.root :controller => 'user_sessions', :action => 'new' # optional, thi
 
 file "features/user_registration.feature", <<-END
 Feature: User Registration
-    In order to create a personalized user space
+    In order to create a personal space for users
     As a guest to the site
     I want to be able to register an account
 
-    Scenario: Creating a new account
+    Scenario:  Going to the Registration Page
        Given I am on the home page
-       And I am not logged in
        When I click on "Register"
-       Then I should see thank you for registering
+       Then I should see "Register Account"
+
+    Scenario:  A user registers with valid information
+       Given I am on the Registration Page
+       And I fill in "email" with "user@mail.com" 
+       And I fill in "password" with "password"
+       And I fill in "password confirmation" with "password"
+       And I click on "Register"
+       Then I should see "Account registered!"	
+       
+    Scenario:  A user registers with invalid information
+       Given I am on the Registration Page
+       And I fill in "email" with "user@mail.com" 
+       And I fill in "password" with "password"
+       And I fill in "password confirmation" with ""
+       And I click on "Register"
+       Then I should see "Error creating account!"	
+
+    Scenario:  A user logs in to his profile
+       Given the following user records
+       	 |email | password | role |
+	 |sam@none.com | password | user |
+	 |admin@root.com | password | admin |
+       When I log in as "sam@none.com" with password "password"
+       Then I should see "Welcome Sam"
 END
 
 file "features/user_registration_steps.rb", <<-END
@@ -44,7 +67,7 @@ file "db/migrate/#{Time.now.utc.strftime("%Y%m%d%H%M%S")}_create_users.rb"  , <<
 class CreateUsers < ActiveRecord::Migration
   def self.up
     create_table :users do |t|
-      t.string    :login,               :null => false                # optional, you can use email instead, or both
+#      t.string    :login,               :null => false                # optional, you can use email instead, or both
       t.string    :email,               :null => false                # optional, you can use login instead, or both
       t.string    :crypted_password,    :null => false                # optional, see below
       t.string    :password_salt,       :null => false                # optional, but highly recommended
@@ -65,7 +88,7 @@ class CreateUsers < ActiveRecord::Migration
     end
     
     add_index :users, :email
-    add_index :users, :login
+#    add_index :users, :login
     add_index :users, :persistence_token
     add_index :users, :perishable_token    
     add_index :users, :last_request_at
@@ -235,8 +258,8 @@ END
 
 file "app/views/users/show.html.haml", <<-END
 %p
-  %b Login:
-  %=h @user.login
+  %b Email:
+  %=h @user.email
 %p
   %b Login count:
   %=h @user.login_count
@@ -257,9 +280,9 @@ file "app/views/users/show.html.haml", <<-END
 END
 
 file "app/views/users/_form.html.haml", <<-END
-= form.label :login
+= form.label :email
 %br
-= form.text_field :login
+= form.text_field :email
 %br
 %br
 = form.label :password, form.object.new_record? ? nil : "Change password"
@@ -280,9 +303,9 @@ file "app/views/user_sessions/new.html.haml", <<-END
  
 - form_for @user_session, :url => user_sessions_path do |f| 
   = f.error_messages 
-  = f.label :login 
+  = f.label :email
   %br 
-  = f.text_field :login 
+  = f.text_field :email
   %br
   %br 
   = f.label :password 
@@ -300,8 +323,9 @@ END
 # Factory
 file "spec/factories/user.rb", <<-END
 Factory.define :user do |u|
-  u.login 'johndoe'
-  u.email 'john@doe.com'
+  u.sequence {|n| "none_\#{n}all.com"}
+  u.password "password"
+  u.password_confirmation {|u| u.password}
 end
 END
 

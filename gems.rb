@@ -26,6 +26,12 @@ rake "gems:install", :sudo => true
 generate "rspec"
 generate "cucumber"
 
+# Cucumber.yml file
+file "cucumber.yml", <<-END
+autotest: --format pretty features
+autotest-all: --format profile features
+END
+
 
 # Webrat fix to print full stack trace
 file "features/support/local_env.rb",<<-END
@@ -63,7 +69,9 @@ module NavigationHelpers
     case page_name
 
     when /(a|an|the)?\\s*home\\s*page/
-      '/'
+      root_path
+    when /the Registration Page/
+      new_user_path
     # Add more mappings here.
     # Here is a more fancy example:
     #
@@ -81,8 +89,20 @@ World(NavigationHelpers)
 END
 
 file "features/step_definitions/common_steps.rb", <<-END
-When /^I click(?: on)? "([^\\"]*)"$/ do |link|
-  click_link(link)
+Given /^the following (.+) records?$/ do |factory, table|
+  # table is a Cucumber::Ast::Table
+  table.hashes.each do |hash|
+    Factory(factory, hash)
+  end
+end
+
+
+When /^I click(?: on)? "([^\"]*)"$/ do |link|
+  begin
+    click_link(link)
+  rescue Webrat::NotFoundError
+    click_button(link)
+  end
 end
 END
 
@@ -92,5 +112,8 @@ file "app/views/layouts/application.html.haml", <<-END
   %head
     %title Website
   %body
+    - [:error, :success, :notice].each do |type|
+      - if flash[type]
+        %div{:class => type}= flash[type]
     = yield
 END
