@@ -5,6 +5,8 @@ def load(template)
 end
 
 
+install_authlogic = yes?("Install Authlogic?")
+
 
 
 # Create git repository
@@ -17,9 +19,7 @@ run "rm public/index.html"
 load "gems.rb"
 
 # Install authlogic a
-if yes?("Install Authlogic?")
-  load "authlogic.rb"
-end
+load "authlogic.rb" if install_authlogic
 
 # Set up deployment scripts
 load "deploy.rb"
