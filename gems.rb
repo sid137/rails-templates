@@ -9,6 +9,7 @@
 
 gem "rspec", :lib => false
 gem "rspec-rails", :lib => false
+gem "remarkable-rails", :lib => false
 
 gem "cucumber", :lib => false
 gem "webrat", :lib => false
