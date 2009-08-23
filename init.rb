@@ -13,8 +13,6 @@ install_facebook =  yes?("Install Facebook?")
 load  "git.rb"
 
 
-
-
 inside( 'config' ) do
   run "cp database.yml database.yml.default"
   run "cp environment.rb environment.rb.default"
