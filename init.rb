@@ -6,11 +6,21 @@ end
 
 
 install_authlogic = yes?("Install Authlogic?")
-
+install_facebook =  yes?("Install Facebook?")
 
 
 # Create git repository
 load  "git.rb"
+
+
+
+
+inside( 'config' ) do
+  run "cp database.yml database.yml.default"
+  run "cp environment.rb environment.rb.default"
+end 
+
+
 
 run "echo TODO > README"
 run "rm public/index.html"
@@ -20,6 +30,9 @@ load "gems.rb"
 
 # Install authlogic a
 load "authlogic.rb" if install_authlogic
+
+# Create Facebook application
+load "facebook.rb" if install_facebook
 
 # Set up deployment scripts
 load "deploy.rb"

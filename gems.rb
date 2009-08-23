@@ -1,4 +1,6 @@
+
 # Rspec
+# Remarkable
 # cucumber
 # webrat
 # factory-girl
@@ -6,6 +8,8 @@
 # compass-sass
 # exception_notifier
 # will_paginate
+
+run "gem sources -a http://gems.github.com"
 
 gem "rspec", :lib => false
 gem "rspec-rails", :lib => false
@@ -26,6 +30,12 @@ rake "gems:install", :sudo => true
 
 generate "rspec"
 generate "cucumber"
+
+gem 'mislav-will_paginate',
+  :version => '~> 2.2.3',
+  :lib => 'will_paginate',
+  :source => 'http://gems.github.com'
+
 
 # Cucumber.yml file
 file "cucumber.yml", <<-END
