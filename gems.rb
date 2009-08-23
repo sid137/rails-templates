@@ -13,7 +13,7 @@ run "gem sources -a http://gems.github.com"
 
 gem "rspec", :lib => false
 gem "rspec-rails", :lib => false
-gem "remarkable-rails", :lib => false
+gem "remarkable_rails", :lib => false
 
 gem "cucumber", :lib => false
 gem "webrat", :lib => false
