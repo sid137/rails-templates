@@ -1,6 +1,6 @@
 gem "facebooker"
 
 name = "horse"
-data = ERB.new(File.read('facebook/facebooker.yml.erb')).result
+data = ERB.new(File.read(REPO + 'facebook/facebooker.yml.erb')).result
 
 file "config/facebooker.yml", data
