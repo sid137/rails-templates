@@ -20,8 +20,7 @@ end
 
 
 
-run "echo TODO > README"
-run "rm public/index.html"
+
 
 # Install and configure standard gems
 load "gems.rb"
@@ -40,6 +39,10 @@ load "deploy.rb"
 rake "db:create"
 rake "db:create", :env => "test"
 rake "db:migrate"
+
+run "echo 'TODO' > README"
+run "rm public/index.html"
+
 
 git :add => "."
 git :commit => "-a -m 'Finishing application setup'"

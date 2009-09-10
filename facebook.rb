@@ -1,5 +1,8 @@
 gem "facebooker"
 
+initializer 'mime_types.rb', %q{Mime::Type.register_alias 'text/html', :fbml}
+
+
 file "config/facebooker.yml", <<-EOF
 # File: config/facebooker-mock.yml
 # The api key, secret key, and canvas page name are required to get started

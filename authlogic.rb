@@ -323,7 +323,7 @@ END
 # Factory
 file "spec/factories/user.rb", <<-END
 Factory.define :user do |u|
-  u.sequence {|n| "none_\#{n}all.com"}
+  u.sequence(:email) {|n| "none_\#{n}all.com"}
   u.password "password"
   u.password_confirmation {|u| u.password}
 end
