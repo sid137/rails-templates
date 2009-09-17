@@ -21,9 +21,6 @@ gem "webrat", :lib => false
 gem "thoughtbot-factory_girl", :lib => "factory_girl", :source => "http://gems.github.com"
 run "mkdir -p spec/factories/"
 
-gem "haml"
-gem "chriseppstein-compass", :lib => false
-run "mkdir public/stylesheets/sass"
 
 
 rake "gems:install", :sudo => true
