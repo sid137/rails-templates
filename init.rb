@@ -9,7 +9,7 @@ install_authlogic = yes?("Install Authlogic?")
 install_facebook =  yes?("Install Facebook?")
 
 # Install haml/sass/compass 
-load "http://www.compass-style.org/rails/installer"
+load_template "http://www.compass-style.org/rails/installer"
 
 # Create git repository
 load  "git.rb"
