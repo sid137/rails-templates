@@ -1,4 +1,3 @@
-
 # Rspec
 # Remarkable
 # cucumber
@@ -23,7 +22,7 @@ run "mkdir -p spec/factories/"
 
 
 
-rake "gems:install", :sudo => true
+rake "gems:install"
 
 generate "rspec"
 generate "cucumber"
