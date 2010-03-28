@@ -1,7 +1,7 @@
 gem "authlogic"
 gem "bcrypt-ruby", :lib => "bcrypt"
 
-rake "gems:install", :sudo => true
+rake "gems:install"
 
 generate :session, "user_session"
 generate :rspec_controller, "user_sessions"
