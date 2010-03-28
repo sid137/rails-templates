@@ -17,7 +17,7 @@ end
 
 
 # Install haml/sass/compass 
-load_template "http://www.compass-style.org/rails/installer"
+apply "http://www.compass-style.org/rails/installer"
 
 
 
