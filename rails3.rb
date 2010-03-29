@@ -17,8 +17,6 @@ end
 
 
 # Install haml/sass/compass 
-apply "http://www.compass-style.org/rails/installer"
-
 run "compass --rails -f blueprint . --css-dir=public/stylesheets/ --sass-dir=app/stylesheets"
 
 
