@@ -19,7 +19,7 @@ source 'http://gems.github.com'
 
 ## Bundle edge rails:
 gem "rails", :git => "git://github.com/rails/rails.git"
-
+gem "sqlite3-ruby"
 
 #gem "mongo_ext"
 #gem "mongoid", :git => "git://github.com/durran/mongoid.git"
