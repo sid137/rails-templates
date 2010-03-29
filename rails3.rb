@@ -1,19 +1,16 @@
-REPO = "http://github.com/sid137/rails-templates/raw/master/"
-
-def load(template)
-  load_template REPO + template 
-end
-
-
-
 # Create git repository
-load  "git.rb"
+git :init
+file '.gitignore', <<-END
+doc/*
+tmp/**/*
+config/database.yml
+db/*.sqlite3
+END
+
+# git:hold_empty_dirs
+run("find . \\( -type d -empty \\) -and \\( -not -regex ./\\.git.* \\) -exec touch {}/.gitignore \\;")
 
 
-inside( 'config' ) do
-  run "cp database.yml database.yml.default"
-  run "cp environment.rb environment.rb.default"
-end 
 
 
 # Install haml/sass/compass 
