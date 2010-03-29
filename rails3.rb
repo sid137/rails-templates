@@ -1,11 +1,5 @@
 # Create git repository
 git :init
-file '.gitignore', <<-END
-doc/*
-tmp/**/*
-config/database.yml
-db/*.sqlite3
-END
 
 # git:hold_empty_dirs
 run("find . \\( -type d -empty \\) -and \\( -not -regex ./\\.git.* \\) -exec touch {}/.gitignore \\;")
