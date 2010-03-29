@@ -56,6 +56,7 @@ END
 run "echo 'TODO' > README"
 run "rm public/index.html"
 
+run 'bundle install'
 
 git :add => "."
 git :commit => "-a -m 'Finishing application setup'"
