@@ -5,12 +5,6 @@ git :init
 run("find . \\( -type d -empty \\) -and \\( -not -regex ./\\.git.* \\) -exec touch {}/.gitignore \\;")
 
 
-
-
-# Install haml/sass/compass 
-run "compass --rails -f blueprint . --css-dir=public/stylesheets/ --sass-dir=app/stylesheets"
-
-
 # Install and configure standard gems
 file "Gemfile",<<-END
 # Edit this Gemfile to bundle your application's dependencies.
@@ -51,12 +45,47 @@ end
 END
 
 
+file "app/views/layouts/application.html.haml",<<-END
+!!! 5
+%html(xmlns="http://www.w3.org/1999/xhtml")
+  %head
+    %meta(http-equiv="content-type" content="text/html" charset="utf-8")
+    %title Application Template
+
+    = stylesheet_link_tag 'screen.css', :media => 'screen, projection'
+    = stylesheet_link_tag 'print.css', :media => 'print'
+    /[if lt IE 8]
+      = stylesheet_link_tag 'ie.css', :media => 'screen, projection'
+
+    = javascript_include_tag 'http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js'
+    = javascript_include_tag 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/jquery-ui.min.js'
+
+    = javascript_include_tag 'http://www.google.com/jsapi?key=ABQIAAAAWE_Mi-8Zmi4wixpIeFXIWxSah9S-j4zSd7OuZVJ9P6HK1pErfhRLys8c9D8s0Q_R-Itr4xemDQHIog', :charset => 'utf-8'
+
+
+  %body
+
+    %h1 Application Template
+
+
+    - [:error, :success, :notice].each do |type|
+      - if flash[type]
+        .type= flash[type]
+
+
+    = yield
+END
+
+
 
 
 run "echo 'TODO' > README"
 run "rm public/index.html"
 
 run 'bundle install'
+
+# Install haml/sass/compass 
+run "compass --rails -f blueprint . --css-dir=public/stylesheets/ --sass-dir=app/stylesheets"
 
 git :add => "."
 git :commit => "-a -m 'Finishing application setup'"
