@@ -1,3 +1,7 @@
+# To use
+# rails appname -m tiny.cc/rails3
+
+
 # Create git repository
 git :init
 
