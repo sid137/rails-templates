@@ -25,7 +25,7 @@ source 'http://gems.github.com'
 gem "rails", :git => "git://github.com/rails/rails.git"
 gem "sqlite3-ruby"
 
-#gem "mongo_ext"
+#gem "bson_ext"
 #gem "mongoid", :git => "git://github.com/durran/mongoid.git"
 
 #gem "warden"
