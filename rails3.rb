@@ -1,3 +1,7 @@
+# To use
+# rails appname -m tiny.cc/rails3
+
+
 # Create git repository
 git :init
 
@@ -13,9 +17,9 @@ source 'http://gems.github.com'
 
 ## Bundle edge rails:
 gem "rails", :git => "git://github.com/rails/rails.git"
+gem "sqlite3-ruby"
 
-
-#gem "mongo_ext"
+#gem "bson_ext"
 #gem "mongoid", :git => "git://github.com/durran/mongoid.git"
 
 #gem "warden"
