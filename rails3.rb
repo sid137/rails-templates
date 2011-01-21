@@ -23,14 +23,11 @@ gem "sqlite3-ruby", :require => 'sqlite3'
 gem "haml-rails"
 
 group :test do
-#  gem "rspec", :git => "git://github.com/rspec/rspec.git"
-#  gem "rspec-rails", :git => "git://github.com/rspec/rspec-rails.git"
+  gem "faker"
+  gem "ZenTest"
+  gem "rspec-rails" #, :git => "git://github.com/rspec/rspec-rails.git"
 end
 
-#gem "faker"
-group :development do
-#  gem "looksee", :group => [:development, :test]
-end
 END
 
 
@@ -69,8 +66,8 @@ END
 
 run "echo 'TODO' > README"
 run "rm public/index.html"
-
 run 'bundle install'
+run "rails generate rspec:install"
 
 # Install haml/sass/compass 
 run "compass install blueprint/basic  --css-dir=public/stylesheets --sass-dir=app/stylesheets --images-dir=public/images -x sass"
