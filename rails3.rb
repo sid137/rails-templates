@@ -1,6 +1,5 @@
 # To use
-# rails appname -m tiny.cc/rails3
-
+# rails new appname --skip-gemfile -JTm tiny.cc/rails3
 
 # Create git repository
 git :init
