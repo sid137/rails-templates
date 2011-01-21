@@ -12,12 +12,10 @@ run("find . \\( -type d -empty \\) -and \\( -not -regex ./\\.git.* \\) -exec tou
 # Install and configure standard gems
 file "Gemfile",<<-END
 # Edit this Gemfile to bundle your application's dependencies.
-source 'http://gemcutter.org'
-source 'rubygems.org'
-
+source 'http://rubygems.org'
 
 ## Bundle edge rails:
-#gem "rails", :git => "git://github.com/rails/rails.git"
+gem 'rails', '3.0.3'
 gem "sqlite3-ruby", :require => 'sqlite3'
 
 gem "haml-rails"
@@ -40,7 +38,7 @@ file "app/views/layouts/application.html.haml",<<-END
     %title 
 
     = javascript_include_tag "https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"
-    = javascript_include_tag 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/jquery-ui.min.js'
+    = javascript_include_tag 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.9/jquery-ui.min.js'
     = stylesheet_link_tag "screen", :media => "screen, projection"
     = stylesheet_link_tag "print", :media => "print"
 
@@ -63,14 +61,16 @@ file "app/views/layouts/application.html.haml",<<-END
       = yield
 END
 
-
-run "echo 'TODO' > README"
+run "echo 'TODO' > README.md"
+run "rm README"
 run "rm public/index.html"
 run 'bundle install'
-run "rails generate rspec:install"
 
 # Install haml/sass/compass 
 run "compass install blueprint/basic  --css-dir=public/stylesheets --sass-dir=app/stylesheets --images-dir=public/images -x sass"
+
+# Install rspec
+run "rails generate rspec:install"
 
 git :add => "."
 git :commit => "-a -m 'Finishing application setup'"
