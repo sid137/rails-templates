@@ -13,11 +13,17 @@ gem "sqlite3-ruby", :require => 'sqlite3'
 
 gem "haml-rails"
 
-group :test do
+group :development:, :test do
+  # css framework for dev machine
+  gem "compass"
+
+  # model layer, test data generation
   gem "annotate-models"
-  gem "capybara"
   gem "factory_girl_rails"
   gem "faker"
+
+  # testing
+  gem "capybara"
   gem "launchy"
   gem "rspec-rails" #, :git => "git://github.com/rspec/rspec-rails.git"
   gem "ZenTest"
