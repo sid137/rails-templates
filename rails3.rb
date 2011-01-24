@@ -4,9 +4,6 @@
 # Create git repository
 git :init
 
-# git:hold_empty_dirs
-run("find . \\( -type d -empty \\) -and \\( -not -regex ./\\.git.* \\) -exec touch {}/.gitignore \\;")
-
 
 # Install and configure standard gems
 file "Gemfile",<<-END
@@ -20,9 +17,13 @@ gem "sqlite3-ruby", :require => 'sqlite3'
 gem "haml-rails"
 
 group :test do
+  gem "annotate-models"
+  gem "capybara"
+  gem "factory_girl_rails"
   gem "faker"
-  gem "ZenTest"
+  gem "launchy"
   gem "rspec-rails" #, :git => "git://github.com/rspec/rspec-rails.git"
+  gem "ZenTest"
 end
 
 END
@@ -66,10 +67,18 @@ run "rm public/index.html"
 run 'bundle install'
 
 # Install haml/sass/compass 
-run "compass install blueprint/basic  --css-dir=public/stylesheets --sass-dir=app/stylesheets --images-dir=public/images -x sass"
+run "compass init rails --css-dir=public/stylesheets --sass-dir=app/stylesheets -images-dir=public/images -x sass"
+  # ran a second time so I can get my preferred screen.sass starter file
+run "compass install blueprint/basic  --css-dir=public/stylesheets --sass-dir=app/stylesheets --images-dir=public/images -x sass --force"
+  # no initializer.. causes probs with heroku
+run "rm config/initializers/compass.rb"
 
 # Install rspec
-run "rails generate rspec:install"
+generate "rspec:install"
+run "mkdir spec/{routing,models,controllers,views,helpers,mailers,requests}"
+
+# git:hold_empty_dirs
+run("find . \\( -type d -empty \\) -and \\( -not -regex ./\\.git.* \\) -exec touch {}/.gitignore \\;")
 
 git :add => "."
 git :commit => "-a -m 'Finishing application setup'"
