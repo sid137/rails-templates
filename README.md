@@ -4,7 +4,8 @@
 # To Use
 
 I added a function to my .zshrc, which gives me shell shortcut to load the rails3.rb template hosted on
-github.  URL based templates don't currently load due to Rails 3 bug
+github.  URL based templates don't currently load due to Rails 3.0.3 bug
+[#5926](https://rails.lighthouseapp.com/projects/8994/tickets/5926-bug-patch-allow-https-uris-to-be-supplied-for-rails-templates)
 
 Shortcut to initialize rails apps with templates
     function rapp {
