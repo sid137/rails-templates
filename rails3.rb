@@ -25,7 +25,7 @@ group :development, :test do
   # testing
   gem "capybara"
   gem "launchy"
-  gem "rspec-rails" #, :git => "git://github.com/rspec/rspec-rails.git"
+  gem "rspec-rails"
   gem "ZenTest"
 end
 END
@@ -126,7 +126,7 @@ run 'bundle install'
 
 # Install haml/sass/compass 
 run "compass init rails --css-dir=public/stylesheets --sass-dir=app/stylesheets -images-dir=public/images -x sass"
-  # ran a second time so I can get my preferred screen.sass starter file
+  # ran a second time so I can get my preferred screen.sass and __base.sass starter file
 run "compass install blueprint/basic  --css-dir=public/stylesheets --sass-dir=app/stylesheets --images-dir=public/images -x sass --force"
   # no initializer.. causes probs with heroku
 run "rm config/initializers/compass.rb"
