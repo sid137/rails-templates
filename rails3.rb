@@ -8,7 +8,6 @@ file "Gemfile",<<-END
 # Edit this Gemfile to bundle your application's dependencies.
 source 'http://rubygems.org'
 
-## Bundle edge rails:
 gem 'rails', '3.0.3'
 gem "sqlite3-ruby", :require => 'sqlite3'
 
