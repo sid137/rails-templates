@@ -1,9 +1,7 @@
 # To use
 # rails new appname --skip-gemfile -JTm tiny.cc/rails3
 
-# Create git repository
-git :init
-
+### File templates first, commands after
 
 # Install and configure standard gems
 file "Gemfile",<<-END
@@ -25,10 +23,9 @@ group :test do
   gem "rspec-rails" #, :git => "git://github.com/rspec/rspec-rails.git"
   gem "ZenTest"
 end
-
 END
 
-
+# Default application layout
 file "app/views/layouts/application.html.haml",<<-END
 !!! 
 %html(lang='en')
@@ -64,6 +61,7 @@ file "app/views/layouts/application.html.haml",<<-END
 END
 
 
+# Default sass template
 file "app/stylesheets/main.sass", <<-END
 // This import applies a global reset to any page that imports this stylesheet.
 @import blueprint/reset
@@ -93,6 +91,29 @@ header, nav, footer
   +container
 END
 
+# Google analytics partial
+file "app/views/layouts/_google_analytics.html.erb", <<-END
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-XXXXXXX-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+END
+
+
+
+
+
+# Create git repository
+git :init
+
+
 run "echo 'TODO' > README.md"
 run "rm README"
 run "rm public/index.html"
@@ -114,4 +135,3 @@ run("find . \\( -type d -empty \\) -and \\( -not -regex ./\\.git.* \\) -exec tou
 
 git :add => "."
 git :commit => "-a -m 'Finishing application setup'"
-
