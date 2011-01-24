@@ -39,7 +39,7 @@ file "app/views/layouts/application.html.haml",<<-END
 
     = javascript_include_tag "https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"
     = javascript_include_tag 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.9/jquery-ui.min.js'
-    = stylesheet_link_tag "screen", :media => "screen, projection"
+    = stylesheet_link_tag "main", :media => "screen, projection"
     = stylesheet_link_tag "print", :media => "print"
 
     <!--[if IE]><link href="stylesheets/ie.css" rel="stylesheet" /><![endif]-->
@@ -58,7 +58,39 @@ file "app/views/layouts/application.html.haml",<<-END
         - [:error, :success, :notice].each do |type|
             - if flash[type]
                 .type= flash[type]
-      = yield
+      #main
+        = yield
+      %footer
+END
+
+
+file "app/stylesheets/main.sass", <<-END
+// This import applies a global reset to any page that imports this stylesheet.
+@import blueprint/reset
+// To configure blueprint, edit the partials/_base.sass file.
+@import partials/base
+// Import all the default blueprint modules so that we can access their mixins.
+@import blueprint
+// Import the non-default scaffolding module.
+@import blueprint/scaffolding
+
+// Generate the blueprint framework according to your configuration:
+@import "compass/support"
+@import "compass/css3/text-shadow"
+@import "compass/utilities/lists/horizontal-list"
+@import "compass/utilities/links"
+@import "compass/utilities/general/min"
+@import "compass/utilities/text/replacement"
+@import "compass/utilities/lists/inline-block-list"
+
++blueprint
++blueprint-scaffolding
+
+header, nav, footer 
+  +column($blueprint_grid_columns, true)
+
+#container
+  +container
 END
 
 run "echo 'TODO' > README.md"
