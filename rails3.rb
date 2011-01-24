@@ -13,7 +13,7 @@ gem "sqlite3-ruby", :require => 'sqlite3'
 
 gem "haml-rails"
 
-group :development:, :test do
+group :development, :test do
   # css framework for dev machine
   gem "compass"
 
