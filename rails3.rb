@@ -8,12 +8,16 @@ file "Gemfile",<<-END
 # Edit this Gemfile to bundle your application's dependencies.
 source 'http://rubygems.org'
 
-gem 'rails', '3.0.3'
-gem "sqlite3-ruby", :require => 'sqlite3'
+gem 'rails', '3.0.4'
 
 gem "haml-rails"
 
+# gem 'aws-s3', :require => 'aws/s3'
+# gem 'bcrypt-ruby', :require => 'bcrypt'
+
 group :development, :test do
+  gem "sqlite3-ruby", :require => 'sqlite3'
+
   # css framework for dev machine
   gem "compass"
 
@@ -21,13 +25,17 @@ group :development, :test do
   gem "annotate-models"
   gem "factory_girl_rails"
   gem "faker"
+  gem 'forgery'
 
   # testing
-  gem "capybara"
+  gem "autotest"
+  gem 'database_cleaner', :git => 'https://github.com/bmabey/database_cleaner.git'
+  #gem "capybara"
+  gem "cucumber-rails"
+  gem 'webrat'
   gem "launchy"
   gem "rspec-rails"
   gem "ZenTest"
-end
 END
 
 # Default application layout
@@ -39,7 +47,7 @@ file "app/views/layouts/application.html.haml",<<-END
 
     %title 
 
-    = javascript_include_tag "https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"
+    = javascript_include_tag "https://ajax.googleapis.com/ajax/libs/jquery/1.5.0/jquery.min.js"
     = javascript_include_tag 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.9/jquery-ui.min.js'
     = stylesheet_link_tag "main", :media => "screen, projection"
     = stylesheet_link_tag "print", :media => "print"
@@ -98,7 +106,7 @@ END
 
 # Google analytics partial
 file "app/views/layouts/_google_analytics.html.erb", <<-END
-<script type="text/javascript">
+<script>
   var _gaq = _gaq || [];
   _gaq.push(['_setAccount', 'UA-XXXXXXX-1']);
   _gaq.push(['_trackPageview']);
@@ -122,7 +130,7 @@ git :init
 run "echo 'TODO' > README.md"
 run "rm README"
 run "rm public/index.html"
-run 'bundle install'
+run 'bundle install --path vendor'
 
 # Install haml/sass/compass 
 run "compass init rails --css-dir=public/stylesheets --sass-dir=app/stylesheets -images-dir=public/images -x sass"
@@ -137,6 +145,8 @@ run "mkdir spec/{routing,models,controllers,views,helpers,mailers,requests}"
 
 # git:hold_empty_dirs
 run("find . \\( -type d -empty \\) -and \\( -not -regex ./\\.git.* \\) -exec touch {}/.gitignore \\;")
+
+run "ctags -R"
 
 git :add => "."
 git :commit => "-a -m 'Finishing application setup'"
