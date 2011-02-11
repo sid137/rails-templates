@@ -36,6 +36,7 @@ group :development, :test do
   gem "launchy"
   gem "rspec-rails"
   gem "ZenTest"
+end
 END
 
 # Default application layout
@@ -119,9 +120,21 @@ file "app/views/layouts/_google_analytics.html.erb", <<-END
 </script>
 END
 
-
-
-
+run "rm .gitignore"
+file ".gitignore", <<-END  
+tags
+log/*.log  
+*.swp
+*.swo
+.sass-cache
+*~
+*.cache
+*.log
+*.pid
+tmp/**/*
+db/*.sqlite3
+vendor/**/*
+END
 
 # Create git repository
 git :init
@@ -142,6 +155,7 @@ run "rm config/initializers/compass.rb"
 # Install rspec
 generate "rspec:install"
 run "mkdir spec/{routing,models,controllers,views,helpers,mailers,requests}"
+
 
 # git:hold_empty_dirs
 run("find . \\( -type d -empty \\) -and \\( -not -regex ./\\.git.* \\) -exec touch {}/.gitignore \\;")
