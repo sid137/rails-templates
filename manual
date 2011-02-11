@@ -1,3 +1,0 @@
-# spec_helper.rb after spec/rails
-require 'spec/rails'
-require 'remarkable/rails'

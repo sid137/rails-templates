@@ -138,14 +138,30 @@ db/*.sqlite3
 vendor/bundle
 END
 
+
+file "README.md", <<-END
+Compile css
+    compass watch .
+
+Create Pivotal Tracker project
+
+Create stories, specs and tests
+
+Create heroku and github repos and remotes
+
+Ensure that files listed in SECRETS are never shared publicly
+END
+
+file "SECRETS", <<-END
+config/initializers/secret_token.rb
+config/database.yml
+END
+
 # Create git repository
 git :init
 
-
-run "echo 'TODO' > README.md"
 run "rm README"
 run "rm public/index.html"
-
 run 'bundle install --path vendor/bundle --binstubs'
 
 # Install haml/sass/compass 
@@ -159,7 +175,6 @@ run "echo '--format documentation' >> .rspec"
 
 run "mkdir spec/{routing,models,controllers,views,helpers,mailers,requests}"
 
-
 # git:hold_empty_dirs
 run("find . \\( -type d -empty \\) -and \\( -not -regex ./\\.git.* \\) -exec touch {}/.gitignore \\;")
 
@@ -167,3 +182,5 @@ run "ctags -R"
 
 git :add => "."
 git :commit => "-a -m 'Finishing application setup'"
+git :branch => "staging"
+git :branch => "development"
