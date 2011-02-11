@@ -30,12 +30,14 @@ group :development, :test do
   # testing
   gem "autotest"
   gem 'database_cleaner', :git => 'https://github.com/bmabey/database_cleaner.git'
-  #gem "capybara"
+  
+  # controller helper not available for integration tests, so use webrat for now
+  # gem "capybara"  
+
   gem "cucumber-rails"
   gem 'webrat'
   gem "launchy"
   gem "rspec-rails"
-  gem "ZenTest"
 end
 END
 
@@ -143,7 +145,10 @@ git :init
 run "echo 'TODO' > README.md"
 run "rm README"
 run "rm public/index.html"
-run 'bundle install --path vendor'
+
+# This should work, but doesn't complains about Gemfile.loc.  bug?
+run 'bundle install --deployment --binstubs'
+run 'bundle install --path vendor/bundle --binstubs'
 
 # Install haml/sass/compass 
 run "compass init rails --css-dir=public/stylesheets --sass-dir=app/stylesheets -images-dir=public/images -x sass"
@@ -154,6 +159,8 @@ run "rm config/initializers/compass.rb"
 
 # Install rspec
 generate "rspec:install"
+run "echo '--format documentation' >> .rspec"
+
 run "mkdir spec/{routing,models,controllers,views,helpers,mailers,requests}"
 
 
