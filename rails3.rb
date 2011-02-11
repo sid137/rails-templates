@@ -28,7 +28,6 @@ group :development, :test do
   gem 'forgery'
 
   # testing
-  gem "autotest"
   gem 'database_cleaner', :git => 'https://github.com/bmabey/database_cleaner.git'
   
   # controller helper not available for integration tests, so use webrat for now
@@ -38,6 +37,8 @@ group :development, :test do
   gem 'webrat'
   gem "launchy"
   gem "rspec-rails"
+  gem "ZenTest"
+  gem "autotest-rails"
 end
 END
 
