@@ -135,7 +135,7 @@ log/*.log
 *.pid
 tmp/**/*
 db/*.sqlite3
-vendor/**/*
+vendor/bundle
 END
 
 # Create git repository
@@ -146,15 +146,11 @@ run "echo 'TODO' > README.md"
 run "rm README"
 run "rm public/index.html"
 
-# This should work, but doesn't complains about Gemfile.loc.  bug?
-run 'bundle install --deployment --binstubs'
 run 'bundle install --path vendor/bundle --binstubs'
 
 # Install haml/sass/compass 
-run "compass init rails --css-dir=public/stylesheets --sass-dir=app/stylesheets -images-dir=public/images -x sass"
-  # ran a second time so I can get my preferred screen.sass and __base.sass starter file
-run "compass install blueprint/basic  --css-dir=public/stylesheets --sass-dir=app/stylesheets --images-dir=public/images -x sass --force"
-  # no initializer.. causes probs with heroku
+run "compass init rails --css-dir=public/stylesheets --sass-dir=app/stylesheets --images-dir=public/images -x sass --using blueprint/basic"
+# no initializer.. causes probs with heroku
 run "rm config/initializers/compass.rb"
 
 # Install rspec
