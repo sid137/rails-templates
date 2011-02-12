@@ -37,6 +37,7 @@ group :development, :test do
   gem 'webrat'
   gem "launchy"
   gem "rspec-rails"
+  gem 'shoulda-matchers'
   gem "ZenTest"
   gem "autotest-rails"
 end
