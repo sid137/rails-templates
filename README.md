@@ -1,7 +1,7 @@
 
-Rails Application Templates
+# Rails Application Templates
 
-# To Use
+## To Use
 
 If you want, you can simply download the rails3.rb template file, and feed it
 the rails command as an argument when you generate a new app:
@@ -14,7 +14,6 @@ I added a function to my .zshrc, which gives me shell shortcut to load the rails
 github.  
 
 ZSH function to initialize rails apps with templates
-
 file: ~/.zsrhc
 
     function rapp {
@@ -24,7 +23,7 @@ file: ~/.zsrhc
     }
 
 
-Run the default rails3.rb template by using the shell command
+With this shell command in place you can then rRun the default rails3.rb template by using the shell command
     %  rapp appname
 
 
