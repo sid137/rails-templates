@@ -176,6 +176,7 @@ generate "rspec:install"
 run "echo '--format documentation' >> .rspec"
 
 run "mkdir spec/{routing,models,controllers,views,helpers,mailers,requests}"
+run "touch spec/factories.rb"
 
 # git:hold_empty_dirs
 run("find . \\( -type d -empty \\) -and \\( -not -regex ./\\.git.* \\) -exec touch {}/.gitignore \\;")

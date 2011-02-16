@@ -1,7 +1,14 @@
 
-
+Rails Application Templates
 
 # To Use
+
+If you want, you can simply download the rails3.rb template file, and feed it
+the rails command as an argument when you generate a new app:
+
+    wget --no-check-certificate 'https://github.com/sid137/rails-templates/raw/master/rails3.rb'
+    rails new $appname --skip-gemfile -JTm rails3.rb 
+
 
 I added a function to my .zshrc, which gives me shell shortcut to load the rails3.rb template hosted on
 github.  
