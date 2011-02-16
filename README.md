@@ -26,7 +26,57 @@ file: ~/.zsrhc
 With this shell command in place you can then rRun the default rails3.rb template by using the shell command
     %  rapp appname
 
+## Template Actions
 
-or  run another template named template_name.rb  with
-    % rapp appname template_name
+This template carries out the following actions when you run it for a new rails
+app.
+
+* Installs a default GEMFILE with my normal gems
+
+* Installs a HAMlM based layout, application.html.haml.  
+
+  -  Layout loads JQuery from Google CDN
+
+  -  Stylesheets 
+
+  - HTML5 shiv to make older brozswers recognize HTML5 styling
+
+  - sets up favicon and google analytics partial
+
+  - renders flashes in <header></header> tag
+
+* Default main.sass file which loads things I use
+
+* Creates a Google Analytics partial
+
+* Creates a .gitignore
+
+* Creates a README.md listing next steps to take
+
+* Creates a SECRETS file listing files to never let sneak into the open public
+
+* Creates a git repository for project
+
+* Installs Compass/Sass to manage css
+
+* Installs rspec and configures it for documentation format
+
+* Creates rspec directories needed for all testing
+
+* Creates an empty spec/factories.rb for using Factory Girl
+
+* Tells git to not ignore empty directories that we want to save
+
+* uses Bundler to install all gems to the project vendor/bundler directory,
+  along with shortcuts in the bin directory
+
+* runs ctags to create a ctags file for navigating all of the gems, along with
+  the rails source
+
+* Adds all files to the git rerpo
+
+* Finalizes initial commit
+
+* Creates local branches for staging and development
+
 
