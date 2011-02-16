@@ -33,7 +33,7 @@ app.
 
 * Installs a default GEMFILE with my normal gems
 
-* Installs a HAMlM based layout, application.html.haml.  
+* Installs a HAML based layout, application.html.haml.  
 
   -  Layout loads JQuery from Google CDN
 
