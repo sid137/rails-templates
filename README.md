@@ -1,13 +1,15 @@
 
 # Rails Application Templates
 
+This is a rails application template for quickly setting up Rails 3 apps.
+
 ## To Use
 
-Fast:
+### Fastest, try it out:
 
     rails new appname --skip-gemfile -JTm tiny.cc/rails3
 
-Slower:
+### Slower, installation:
 
 If you want, you can simply download the rails3.rb template file, and feed it
 the rails command as an argument when you generate a new app:
@@ -17,7 +19,7 @@ the rails command as an argument when you generate a new app:
 
 
 
-Slowest:
+### Recommended installation, For long term usage:
 
 I added a function to my .zshrc, which gives me shell shortcut to load the rails3.rb template hosted on
 github.  
