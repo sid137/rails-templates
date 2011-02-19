@@ -14,6 +14,7 @@ gem "haml-rails"
 
 # gem 'aws-s3', :require => 'aws/s3'
 # gem 'bcrypt-ruby', :require => 'bcrypt'
+# gem 'formtastic'
 
 group :development, :test do
   gem "sqlite3-ruby", :require => 'sqlite3'
@@ -76,11 +77,14 @@ file "app/views/layouts/application.html.haml",<<-END
       #main
         = yield
       %footer
+        = debug(params)
+        = debug(cookies)
 END
 
 
 # Default sass template
 file "app/stylesheets/main.sass", <<-END
+// API located at: http://compass-style.org/docs/reference/compass/
 // This import applies a global reset to any page that imports this stylesheet.
 @import blueprint/reset
 // To configure blueprint, edit the partials/_base.sass file.
@@ -101,6 +105,13 @@ file "app/stylesheets/main.sass", <<-END
 
 +blueprint
 +blueprint-scaffolding
+
+
+@mixin horizontal-center($width: 500px) {
+  display: block
+  width: $width
+  margin: auto
+}
 
 header, nav, footer 
   +column($blueprint_grid_columns, true)
