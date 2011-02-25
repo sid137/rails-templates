@@ -107,11 +107,10 @@ file "app/stylesheets/main.sass", <<-END
 +blueprint-scaffolding
 
 
-@mixin horizontal-center($width: 500px) {
+@mixin horizontal-center($width: 500px) 
   display: block
   width: $width
   margin: auto
-}
 
 header, nav, footer 
   +column($blueprint_grid_columns, true)
