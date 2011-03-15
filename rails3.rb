@@ -18,6 +18,7 @@ gem "haml-rails"
 
 group :development, :test do
   gem "sqlite3-ruby", :require => 'sqlite3'
+  gem "ruby-debug19", :require => 'ruby-debug'
 
   # css framework for dev machine
   gem "compass"
@@ -72,8 +73,8 @@ file "app/views/layouts/application.html.haml",<<-END
     #container
       %header
         - [:error, :success, :notice].each do |type|
-            - if flash[type]
-                .type= flash[type]
+          - if flash[type]
+            .type= flash[type]
       #main
         = yield
       %footer
@@ -110,7 +111,7 @@ file "app/stylesheets/main.sass", <<-END
 @mixin horizontal-center($width: 500px) 
   display: block
   width: $width
-  margin: auto
+  margin: 0 auto
 
 header, nav, footer 
   +column($blueprint_grid_columns, true)
@@ -174,6 +175,7 @@ git :init
 
 run "rm README"
 run "rm public/index.html"
+run "rm app/views/layouts/application.html.erb"
 run 'bundle install --path vendor/bundle --binstubs'
 
 # Install haml/sass/compass 
