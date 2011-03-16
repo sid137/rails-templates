@@ -8,7 +8,7 @@ file "Gemfile",<<-END
 # Edit this Gemfile to bundle your application's dependencies.
 source 'http://rubygems.org'
 
-gem 'rails', '3.0.4'
+gem 'rails'
 
 gem "haml-rails"
 
@@ -19,6 +19,9 @@ gem "haml-rails"
 group :development, :test do
   gem "sqlite3-ruby", :require => 'sqlite3'
   gem "ruby-debug19", :require => 'ruby-debug'
+
+  # Data export
+  # gem yaml_db
 
   # css framework for dev machine
   gem "compass"
@@ -148,6 +151,7 @@ log/*.log
 *.pid
 tmp/**/*
 db/*.sqlite3
+db/data.yml
 vendor/bundle
 END
 
