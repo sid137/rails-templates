@@ -11,6 +11,7 @@ source 'http://rubygems.org'
 gem 'rails'
 
 gem "haml-rails"
+gem "jquery-rails"
 
 # gem 'aws-s3', :require => 'aws/s3'
 # gem 'bcrypt-ruby', :require => 'bcrypt'
@@ -21,7 +22,7 @@ group :development, :test do
   gem "ruby-debug19", :require => 'ruby-debug'
 
   # Data export
-  # gem yaml_db
+  gem "yaml_db"
 
   # css framework for dev machine
   gem "compass"
@@ -30,6 +31,8 @@ group :development, :test do
   gem "annotate-models"
   gem "factory_girl_rails"
   gem "faker"
+  gem "randexp"
+  gem "random_data"
   gem 'forgery'
 
   # testing
@@ -193,6 +196,10 @@ run "echo '--format documentation' >> .rspec"
 
 run "mkdir spec/{routing,models,controllers,views,helpers,mailers,requests}"
 run "touch spec/factories.rb"
+
+
+# Install jquery
+run "rails generate jquery:install"
 
 # git:hold_empty_dirs
 run("find . \\( -type d -empty \\) -and \\( -not -regex ./\\.git.* \\) -exec touch {}/.gitignore \\;")
