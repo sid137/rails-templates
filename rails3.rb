@@ -62,6 +62,7 @@ file "app/views/layouts/application.html.haml",<<-END
 
     = javascript_include_tag "https://ajax.googleapis.com/ajax/libs/jquery/1.5.0/jquery.min.js"
     = javascript_include_tag 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.9/jquery-ui.min.js'
+    = javascript_include_tag :all
     = stylesheet_link_tag "main", :media => "screen, projection"
     = stylesheet_link_tag "print", :media => "print"
 
@@ -78,9 +79,9 @@ file "app/views/layouts/application.html.haml",<<-END
   %body
     #container
       %header
-        - [:error, :success, :notice].each do |type|
-          - if flash[type]
-            .type= flash[type]
+        - flash.each do |type, value|
+          .flash{ :class => type.to_s }
+            = value 
       #main
         = yield
       %footer
@@ -92,16 +93,18 @@ END
 # Default sass template
 file "app/stylesheets/main.sass", <<-END
 // API located at: http://compass-style.org/docs/reference/compass/
-// This import applies a global reset to any page that imports this stylesheet.
 @import blueprint/reset
-// To configure blueprint, edit the partials/_base.sass file.
-@import partials/base
-// Import all the default blueprint modules so that we can access their mixins.
+
+$blueprint-grid-columns : 24
+$blueprint-grid-width   : 30px
+$blueprint-grid-margin  : 10px
+
+$blueprint-grid-outer-width = $blueprint_grid_width + $blueprint_grid_margin
+$blueprint-container-size = $blueprint_grid_outer_width * $blueprint_grid_columns - $blueprint_grid_margin 
+
 @import blueprint
-// Import the non-default scaffolding module.
 @import blueprint/scaffolding
 
-// Generate the blueprint framework according to your configuration:
 @import "compass/support"
 @import "compass/css3/text-shadow"
 @import "compass/utilities/lists/horizontal-list"
