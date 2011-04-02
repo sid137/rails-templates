@@ -8,7 +8,8 @@ file "Gemfile",<<-END
 # Edit this Gemfile to bundle your application's dependencies.
 source 'http://rubygems.org'
 
-gem 'rails'
+gem 'rails' #, :git => 'git://github.com/rails/rails.git'
+gem 'inherited_resources'
 
 gem "haml-rails"
 gem "jquery-rails"
@@ -21,6 +22,9 @@ group :development, :test do
   gem "sqlite3-ruby", :require => 'sqlite3'
   gem "ruby-debug19", :require => 'ruby-debug'
 
+  # nice table displays in Rails console
+  gem "hirb"
+
   # Data export
   gem "yaml_db"
 
@@ -30,6 +34,8 @@ group :development, :test do
   # model layer, test data generation
   gem "annotate-models"
   gem "factory_girl_rails"
+
+  # Useful for fake data generation
   gem "faker"
   gem "randexp"
   gem "random_data"
@@ -57,31 +63,16 @@ file "app/views/layouts/application.html.haml",<<-END
 %html(lang='en')
   %head
     %meta(charset='utf-8')
-
     %title 
-
-    = javascript_include_tag "https://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"
-    = javascript_include_tag 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.9/jquery-ui.min.js'
-    = javascript_include_tag :all
-    = stylesheet_link_tag "main", :media => "screen, projection"
-    = stylesheet_link_tag "print", :media => "print"
-
-    <!--[if IE]><link href="stylesheets/ie.css" rel="stylesheet" /><![endif]-->
-    <!-- HTML5 Shiv http://code.google.com/p/html5shiv/ -->
-    <!--[if lt IE 9]> 
-    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script> 
-    <script src="http://ie7-js.googlecode.com/svn/version/2.1(beta4)/IE9.js">IE7_PNG_SUFFIX=".png";</script>
-    <![endif]-->
-
-    = favicon_link_tag
-    /= render 'layouts/google_analytics'
+    = render 'layouts/head'
+    
+    = yield :stylesheets
+    = yield :javascripts
 
   %body
     #container
       %header
-        - flash.each do |type, value|
-          .flash{ :class => type.to_s }
-            = value 
+        = render 'layouts/flashes'
       #main
         = yield
       %footer
@@ -89,6 +80,29 @@ file "app/views/layouts/application.html.haml",<<-END
         = debug(cookies)
 END
 
+file "app/views/layouts/_flashes.html.haml", <<-END
+- flash.each do |type, value|
+  .flash{ :class => type.to_s }
+    = value 
+END
+
+file "app/views/layouts/_head.html.haml", <<-END
+= javascript_include_tag "https://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"
+= javascript_include_tag 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.9/jquery-ui.min.js'
+= javascript_include_tag :all
+= stylesheet_link_tag "main", :media => "screen, projection"
+= stylesheet_link_tag "print", :media => "print"
+
+<!--[if IE]><link href="stylesheets/ie.css" rel="stylesheet" /><![endif]-->
+<!-- HTML5 Shiv http://code.google.com/p/html5shiv/ -->
+<!--[if lt IE 9]> 
+<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script> 
+<script src="http://ie7-js.googlecode.com/svn/version/2.1(beta4)/IE9.js">IE7_PNG_SUFFIX=".png";</script>
+<![endif]-->
+
+= favicon_link_tag
+/= render 'layouts/google_analytics'
+END
 
 # Default sass template
 file "app/stylesheets/main.sass", <<-END
@@ -115,7 +129,6 @@ $blueprint-container-size = $blueprint_grid_outer_width * $blueprint_grid_column
 
 +blueprint
 +blueprint-scaffolding
-
 
 @mixin horizontal-center($width: 500px) 
   display: block
@@ -163,8 +176,8 @@ END
 
 
 file "README.md", <<-END
-Compile css
-    compass watch .
+Compile css with:
+    compass watch 
 
 Create Pivotal Tracker project
 
@@ -186,7 +199,7 @@ git :init
 run "rm README"
 run "rm public/index.html"
 run "rm app/views/layouts/application.html.erb"
-run 'bundle install --path vendor/bundle --binstubs'
+run 'bundle install --path vendor/bundle'
 
 # Install haml/sass/compass 
 run "compass init rails --css-dir=public/stylesheets --sass-dir=app/stylesheets --images-dir=public/images -x sass --using blueprint/basic"
