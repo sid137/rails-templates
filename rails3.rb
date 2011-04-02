@@ -60,7 +60,7 @@ file "app/views/layouts/application.html.haml",<<-END
 
     %title 
 
-    = javascript_include_tag "https://ajax.googleapis.com/ajax/libs/jquery/1.5.0/jquery.min.js"
+    = javascript_include_tag "https://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"
     = javascript_include_tag 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.9/jquery-ui.min.js'
     = javascript_include_tag :all
     = stylesheet_link_tag "main", :media => "screen, projection"
