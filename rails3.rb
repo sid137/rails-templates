@@ -44,14 +44,17 @@ group :development, :test do
   # testing
   gem 'database_cleaner', :git => 'https://github.com/bmabey/database_cleaner.git'
   
-  # controller helper not available for integration tests, so use webrat for now
-  # gem "capybara"  
 
-  gem "cucumber-rails"
-  gem 'webrat'
-  gem "launchy"
+  # I don't like cucumber
+  # gem "cucumber-rails"
+  # gem 'webrat'
+
   gem "rspec-rails"
   gem 'shoulda-matchers'
+  # controller helper not available for integration tests, so use webrat for now
+  gem "capybara", :git => 'git://github.com/jnicklas/capybara.git', :require => 'capybara/rspec'
+  gem "launchy"
+
   gem "ZenTest"
   gem "autotest-rails"
 end
@@ -174,6 +177,23 @@ db/data.yml
 vendor/bundle
 END
 
+file "spec/changes", <<-END
+  config.use_transactional_fixtures = false
+  include Capybara::DSL
+
+#  config.before(:suite) do
+#    DatabaseCleaner.strategy = :transaction
+#    DatabaseCleaner.clean_with :truncation
+#  end
+#
+#  config.before(:each) do
+#    DatabaseCleaner.start
+#  end
+#
+#  config.after(:each) do
+#    DatabaseCleaner.clean
+#  end
+END
 
 file "README.md", <<-END
 Compile css with:
