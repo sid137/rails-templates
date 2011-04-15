@@ -17,6 +17,7 @@ gem "jquery-rails"
 # gem 'aws-s3', :require => 'aws/s3'
 # gem 'bcrypt-ruby', :require => 'bcrypt'
 # gem 'formtastic'
+# gem 'devise'
 
 group :development, :test do
   gem "sqlite3-ruby", :require => 'sqlite3'
@@ -202,7 +203,7 @@ Compile css with:
 Create Pivotal Tracker project
 
 Create stories, specs and tests
-
+ 
 Create heroku and github repos and remotes
 
 Ensure that files listed in SECRETS are never shared publicly
@@ -230,7 +231,7 @@ run "rm config/initializers/compass.rb"
 generate "rspec:install"
 run "echo '--format documentation' >> .rspec"
 
-run 'mkdir spec/{routing,models,controllers,views,helpers,mailers,requests}'
+# run 'mkdir spec/{routing,models,controllers,views,helpers,mailers,requests}'
 run "touch spec/factories.rb"
 
 
