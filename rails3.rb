@@ -230,7 +230,7 @@ run "rm config/initializers/compass.rb"
 generate "rspec:install"
 run "echo '--format documentation' >> .rspec"
 
-run "mkdir spec/{routing,models,controllers,views,helpers,mailers,requests}"
+run 'mkdir spec/{routing,models,controllers,views,helpers,mailers,requests}'
 run "touch spec/factories.rb"
 
 
