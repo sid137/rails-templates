@@ -91,7 +91,7 @@ file "app/views/layouts/_flashes.html.haml", <<-END
 END
 
 file "app/views/layouts/_head.html.haml", <<-END
-= javascript_include_tag "https://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"
+= javascript_include_tag "http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"
 = javascript_include_tag 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.9/jquery-ui.min.js'
 = javascript_include_tag :all
 = stylesheet_link_tag "main", :media => "screen, projection"
@@ -179,7 +179,8 @@ vendor/bundle
 END
 
 file "spec/changes", <<-END
-  config.use_transactional_fixtures = false
+##previously needed, but not  needed with Jose Valim hack
+#  config.use_transactional_fixtures = false   
   include Capybara::DSL
 
 #  config.before(:suite) do
@@ -194,6 +195,23 @@ file "spec/changes", <<-END
 #  config.after(:each) do
 #    DatabaseCleaner.clean
 #  end
+END
+
+file "spec/support/shared_connection.rb", <<-END
+# see following URL thread for more info
+# http://groups.google.com/group/ruby-capybara/browse_thread/thread/248e89ae2acbf603/122ed17a45f3b397?lnk=raot#122ed17a45f3b397
+class ActiveRecord::Base
+  mattr_accessor :shared_connection
+  @@shared_connection = nil
+
+  def self.connection
+    @@shared_connection || retrieve_connection
+  end
+end
+
+# Forces all threads to share the same connection. This works on
+# Capybara because it starts the web server in a thread.
+ActiveRecord::Base.shared_connection = ActiveRecord::Base.connection 
 END
 
 file "README.md", <<-END
@@ -235,7 +253,7 @@ run "echo '--format documentation' >> .rspec"
 run "touch spec/factories.rb"
 
 
-# Install jquery
+# Install jquery - remove after rails 3.1
 run "rails generate jquery:install"
 
 # git:hold_empty_dirs
@@ -245,5 +263,4 @@ run "ctags -R"
 
 git :add => "."
 git :commit => "-a -m 'Finishing application setup'"
-git :branch => "staging"
-git :branch => "development"
+git :branch => "dev"
