@@ -8,8 +8,7 @@ file "Gemfile",<<-END
 # Edit this Gemfile to bundle your application's dependencies.
 source 'http://rubygems.org'
 
-gem 'rails' #, :git => 'git://github.com/rails/rails.git'
-gem 'inherited_resources'
+gem 'rails' 
 
 gem "haml-rails"
 gem "jquery-rails"
@@ -33,7 +32,6 @@ group :development, :test do
   gem "compass"
 
   # model layer, test data generation
-  gem "annotate-models"
   gem "factory_girl_rails"
 
   # Useful for fake data generation
@@ -43,12 +41,8 @@ group :development, :test do
   gem 'forgery'
 
   # testing
-  gem 'database_cleaner', :git => 'https://github.com/bmabey/database_cleaner.git'
+#  gem 'database_cleaner', :git => 'https://github.com/bmabey/database_cleaner.git'
   
-
-  # I don't like cucumber
-  # gem "cucumber-rails"
-  # gem 'webrat'
 
   gem "rspec-rails"
   gem 'shoulda-matchers'
