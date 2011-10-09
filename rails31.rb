@@ -1,5 +1,5 @@
 # To use
-# rails new appname --skip-gemfile -JTm tiny.cc/rails3
+# rails new appname --skip-gemfile -JTm tiny.cc/rails31
 
 ### File templates first, commands after
 
@@ -169,6 +169,34 @@ group :development, :test do
 end
 END
 
+file "Termfile",<<-END
+window do
+  run "vim"
+
+  tab ''
+
+  tab do
+    run "rails console"
+  end
+
+  # Add one for pg as well
+  
+  tab do
+    mongo_lockfile = '/data/db/mongod.lock'
+    if File.exists?(mongo_lockfile)
+      File.unlink mongo_lockfile
+      run "mongod --repair"
+    end
+    run "mongod"
+  end
+
+  tab do
+    run "guard"
+  end
+end
+
+END
+
 file "app/views/layouts/_javascripts.html.haml",<<-END
 = javascript_include_tag "application"
 = yield :javascript
@@ -335,8 +363,7 @@ END
 
 
 file "Procfile", <<-END
-web: 
-workers:
+web: bundle exec thin -D start -p $PORT 
 END
 
 file "app/views/layouts/_flashes.html.haml", <<-END
