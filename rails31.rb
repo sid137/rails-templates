@@ -118,12 +118,13 @@ group :development, :test do
   gem 'sqlite3'
   gem "ruby-debug19", :require => 'ruby-debug'
 
-  gem "guard"
+  gem "guard", :git => "git://github.com/guard/guard.git"
   gem "guard-bundler"
-  gem "guard-rails", :git => "git://github.com/johnbintz/guard-rails.git"
+  gem "guard-rails", :git => "git://github.com/guard/guard-rails.git"
   gem "guard-rspec"
   gem "guard-shell"
   gem "guard-livereload"
+
   gem 'rb-fsevent', :require => false 
   gem "growl"
 
@@ -312,11 +313,6 @@ END
 file "Guardfile", <<-END
 # A sample Guardfile
 # More info at https://github.com/guard/guard#readme
-# :project_path: path to the compass project directory (from guard working directory)
-# :configuration_file: path to your compass configuration file (from guard working directory)
-guard 'compass', :configuration_file => 'config/compass.rb' do
-  watch(/^app\/stylesheets\/(.*)\.s[ac]ss/)
-end
 
 
 # https://github.com/mockko/livereload#readme
