@@ -192,7 +192,7 @@ window do
   end
 
   tab do
-    run "guard"
+    run "bundle exec guard"
   end
 end
 
