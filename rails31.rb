@@ -219,10 +219,23 @@ file "app/assets/stylesheets/application.css",<<-END
  * and any sub-directories. You're free to add application-wide styles to this file and they'll appear at
  * the top of the compiled file, but it's generally better to create a new file per style scope.
  *= require bootstrap
+ *= require bootstrap_changes
+ *= require formtastic
+ *= require formtastic_changes
  *= require_self
  *= require_tree . 
 */
+END
 
+file "app/assets/stylesheets/formtastic_changes.css",<<-END
+/*  Added to make formtastic forms display a little more neatly */
+form.formtastic li { 
+  list-style-type: none;
+  margin-top: 10px
+} 
+END
+
+file "app/assets/stylesheets/bootstrap_changes.css",<<-END
 /* Override some defaults */
 html, body {
   background-color: #eee;
@@ -287,6 +300,7 @@ file "app/views/layouts/application.html.haml",<<-END
       %script(src="http://html5shim.googlecode.com/svn/trunk/html5.js")
     = stylesheet_link_tag "application"
     = favicon_link_tag
+    = csrf_metga_tag
 
   %body
     .topbar
@@ -485,6 +499,9 @@ run "echo '--format documentation' >> .rspec"
 # Install Devise
 generate "devise:install"
 generate "devise User"
+
+# Install Formtastic
+generate "formtastic:install"
 
 # Generate a default home controller
 generate :controller,  "home",  "index"
