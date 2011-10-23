@@ -61,9 +61,12 @@ gem "haml-rails"
 gem "jquery-rails"
 # Gems used only for assets and not required
 # in production environments by default.
-gem 'twitter-bootstrap-rails', :git => 'http://github.com/seyhunak/twitter-bootstrap-rails.git'
+# gem 'twitter-bootstrap-rails', :git => 'http://github.com/seyhunak/twitter-bootstrap-rails.git'
 
 group :assets do
+  gem 'compass', git: 'https://github.com/chriseppstein/compass.git'
+  gem 'anjlab-bootstrap-rails', :require => 'bootstrap-rails', :git => 'git://github.com/anjlab/bootstrap-rails.git'
+
   gem 'less'
   gem 'less-rails', :git => 'git://github.com/metaskills/less-rails.git'
   gem 'sass-rails',   '~> 3.1.4'
